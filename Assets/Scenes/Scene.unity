@@ -6658,6 +6658,7 @@ GameObject:
   - component: {fileID: 1110662737374619375}
   - component: {fileID: 1098594480023801524}
   - component: {fileID: 1098594480023801525}
+  - component: {fileID: 1098594480023801526}
   m_Layer: 0
   m_Name: testTrash
   m_TagString: Untagged
@@ -6695,6 +6696,18 @@ CapsuleCollider:
   m_Height: 0.20064688
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: -0.0000000018626451}
+--- !u!114 &1098594480023801526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098594480023801523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbef88e33a1512e4cad9e715c73bd536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &1099638988952782985
 MeshFilter:
   m_ObjectHideFlags: 0
