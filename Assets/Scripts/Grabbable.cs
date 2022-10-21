@@ -1,6 +1,7 @@
+using DG.Tweening;
 using UnityEngine;
 
-public class Grabbable : MonoBehaviour //TODO: Improve performance by checking if someone is subscribed to a variable before reading input
+public class Grabbable : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private Rigidbody _rigidbody;
@@ -8,6 +9,11 @@ public class Grabbable : MonoBehaviour //TODO: Improve performance by checking i
     private bool _isInitialized;
 
     private bool _holdingSmth;
+
+    private InputManager _inputManager = InputManager.Instance;
+
+    float grabHeight = -1.7f;
+    private float speed = 0.3f;
     
     //// Delegates ////
     private delegate void LiftDelegate();
@@ -22,12 +28,8 @@ public class Grabbable : MonoBehaviour //TODO: Improve performance by checking i
         Initialize();
     }
     
-    
-
     public void Initialize()
     {
-        FillDelegates();
-        
         if (_rigidbody == null)
             _rigidbody = GetComponent<Rigidbody>();
         
@@ -38,27 +40,34 @@ public class Grabbable : MonoBehaviour //TODO: Improve performance by checking i
         }
         //
     }
-
-    protected virtual void FillDelegates()
-    {
-        _liftDelegate += () =>
-        {
-            if (_rigidbody.useGravity)
-                _rigidbody.useGravity = false;
-            
-            if (!_holdingSmth)
-                _holdingSmth = true;
-        };
-
-        _releaseDelegate += () =>
-        {
-            if (!_rigidbody.useGravity)
-                _rigidbody.useGravity = true;
-            
-            if (_holdingSmth)
-                _holdingSmth = false;
-        };
-    }
     
+    public void Lift()
+    {
+        if (_rigidbody.useGravity)
+            _rigidbody.useGravity = false;
+
+        _inputManager.MousePosEvent += Move;
+        _inputManager.ReleaseEvent += Release;
+            
+        if (!_holdingSmth)
+            _holdingSmth = true;
+    }
+
+    public void Release()
+    {
+        if (!_rigidbody.useGravity)
+            _rigidbody.useGravity = true;
+        
+        _inputManager.MousePosEvent -= Move;
+        _inputManager.ReleaseEvent -= Release;
+            
+        if (_holdingSmth)
+            _holdingSmth = false;
+    }
+
+    void Move(Vector3 vector3)
+    {
+        _rigidbody.transform.DOMove(new Vector3(vector3.x, vector3.y, grabHeight), speed);
+    }
 
 }

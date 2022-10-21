@@ -5,20 +5,20 @@ public class InputManager : MonoBehaviour
     [HideInInspector]
     public static InputManager Instance;
 
+    [SerializeField]private Camera MainCamera;
+
     public delegate void ClickDelegate();
     public event ClickDelegate ClickEvent;
 
-    delegate void MousePosDelegate();
+    public delegate void MousePosDelegate(Vector3 vector3);
 
-    private event MousePosDelegate MousePosEvent;
+    public event MousePosDelegate MousePosEvent;
+
+    public delegate void ReleaseDelegate();
+
+    public event ReleaseDelegate ReleaseEvent;
 
     public bool holding; // TODO: Add hold detection
-
-    [Space(10)]
-    
-    // Shows us where the last click was or where last hold ended
-    public float mouseX;
-    public float mouseY;
 
     private InputManager()
     {
@@ -33,21 +33,41 @@ public class InputManager : MonoBehaviour
         
         if (ClickEvent != null && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            SetMousePosition();
+            GetMousePosition();
             ClickEvent.Invoke();
         }
-        
-        if (MousePosEvent != null && Input.GetKeyUp(KeyCode.Mouse0))
+
+        if (ReleaseEvent != null && Input.GetKeyUp(KeyCode.Mouse0))
         {
-            SetMousePosition();
+            ReleaseEvent?.Invoke();
+            
+            
+        }
+        
+        if (MousePosEvent != null)
+        {
+            MousePosEvent?.Invoke(GetMousePosition());
         }
         
     }
 
-    void SetMousePosition()
+    Vector3 GetMousePosition()
     {
-        mouseX = Input.GetAxisRaw("Horizontal");
-        mouseY = Input.GetAxisRaw("Vertical");
+        var vector = new Vector3
+            (Input.mousePosition.x,
+                Input.mousePosition.y,
+                MainCamera.transform.position.z);
+        
+        vector = MainCamera.ScreenToWorldPoint(vector);
+
+        Debug.Log(vector.x + " " + vector.y);
+        
+        vector = new Vector3(
+            vector.x,
+            vector.y,
+            vector.z);
+
+        return vector;
     }
     
 }

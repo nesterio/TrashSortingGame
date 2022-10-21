@@ -4,7 +4,7 @@ namespace Scripts.Clicking
 {
     public class ClickDetector
     {
-        InputManager _inputManager = InputManager.Instance;
+        readonly InputManager _inputManager = InputManager.Instance;
 
         public ClickDetector()
         {
@@ -23,10 +23,13 @@ namespace Scripts.Clicking
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out raycastHit, 100f))
             {
+                Debug.Log(raycastHit.transform.gameObject.name);
+                
                 if (raycastHit.transform != null 
-                    && raycastHit.transform.gameObject.CompareTag("Trash")) // TODO: add tag Trash
+                    && raycastHit.transform.gameObject.CompareTag("Trash"))
                 {
                     var hitTrash = raycastHit.transform.gameObject;
+                    hitTrash.GetComponent<Grabbable>().Lift();
                 }
                 else
                 {
