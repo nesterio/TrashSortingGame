@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using DG.Tweening;
 
-public class Grabbable : MonoBehaviour
+public class Grabbable : MonoBehaviour //TODO: Improve performance by checking if someone is subscribed to a variable before reading input
 {
     [Header("Components")]
     [SerializeField] private Rigidbody _rigidbody;
@@ -64,37 +59,6 @@ public class Grabbable : MonoBehaviour
                 _holdingSmth = false;
         };
     }
-
-    // Update is called once per frame
-    protected void Update()
-    {
-        if(_isInitialized == false)
-            return;
-        
-        //Check for mouse click 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (_holdingSmth == true)
-                TryDetectItem();
-            else
-                _releaseDelegate?.Invoke();
-        } 
-        
-    }
-
-    private void TryDetectItem() // TODO: https://www.dropbox.com/scl/fi/3fxr9jfh0xvewqip266mq/.paper?dl=0&noframe=0&rlkey=v03pklhqcpltj02hmrc3gfkzo
-    {
-        RaycastHit raycastHit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out raycastHit, 100f))
-        {
-            if (raycastHit.transform != null 
-                && raycastHit.transform.gameObject.CompareTag("Trash")) // TODO: add tag Trash
-            {
-                if (raycastHit.transform.gameObject == gameObject)
-                    _liftDelegate?.Invoke();
-            }
-        }
-    }
+    
 
 }
