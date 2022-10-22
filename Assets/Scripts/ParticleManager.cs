@@ -18,7 +18,6 @@ public static class ParticleManager
         if(particleSystem != null)
             particleSystem.Play();
         
-        MonoBehaviour.Destroy(particleObj, 5);
-        //
+        Object.Destroy(particleObj, 5);
     }
 }

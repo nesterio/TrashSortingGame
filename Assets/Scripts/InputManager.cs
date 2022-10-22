@@ -40,8 +40,6 @@ public class InputManager : MonoBehaviour
         if (ReleaseEvent != null && Input.GetKeyUp(KeyCode.Mouse0))
         {
             ReleaseEvent?.Invoke();
-            
-            
         }
         
         if (MousePosEvent != null)
@@ -53,19 +51,14 @@ public class InputManager : MonoBehaviour
 
     Vector3 GetMousePosition()
     {
+        var camPos = MainCamera.transform.position;
+        
         var vector = new Vector3
             (Input.mousePosition.x,
                 Input.mousePosition.y,
-                MainCamera.transform.position.z);
+                camPos.z);
         
         vector = MainCamera.ScreenToWorldPoint(vector);
-
-        Debug.Log(vector.x + " " + vector.y);
-        
-        vector = new Vector3(
-            vector.x,
-            vector.y,
-            vector.z);
 
         return vector;
     }

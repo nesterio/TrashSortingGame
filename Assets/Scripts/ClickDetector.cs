@@ -21,6 +21,7 @@ namespace Scripts.Clicking
         {
             RaycastHit raycastHit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawLine ( ray.origin, ray.origin + ray.direction * 100, Color.red );
             if (Physics.Raycast(ray, out raycastHit, 100f))
             {
                 Debug.Log(raycastHit.transform.gameObject.name);

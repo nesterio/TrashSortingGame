@@ -13,16 +13,10 @@ public class Grabbable : MonoBehaviour
     private InputManager _inputManager = InputManager.Instance;
 
     float grabHeight = -1.7f;
-    private float speed = 0.3f;
-    
-    //// Delegates ////
-    private delegate void LiftDelegate();
-    private LiftDelegate _liftDelegate;
-    //
-    private delegate void ReleaseDelegate();
-    private ReleaseDelegate _releaseDelegate;
-    //
-    
+    private float speed = 1f;
+
+    private Tween _moveTween;
+
     private void Awake()
     {
         Initialize();
@@ -33,7 +27,7 @@ public class Grabbable : MonoBehaviour
         if (_rigidbody == null)
             _rigidbody = GetComponent<Rigidbody>();
         
-        //TODO: Move this to separate PlayerController class
+        //TODO: ?? Move this to separate PlayerController class ??
         if (_rigidbody == null)
         { 
             _rigidbody = gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
@@ -43,9 +37,6 @@ public class Grabbable : MonoBehaviour
     
     public void Lift()
     {
-        if (_rigidbody.useGravity)
-            _rigidbody.useGravity = false;
-
         _inputManager.MousePosEvent += Move;
         _inputManager.ReleaseEvent += Release;
             
@@ -53,13 +44,12 @@ public class Grabbable : MonoBehaviour
             _holdingSmth = true;
     }
 
-    public void Release()
+    private void Release()
     {
-        if (!_rigidbody.useGravity)
-            _rigidbody.useGravity = true;
-        
         _inputManager.MousePosEvent -= Move;
         _inputManager.ReleaseEvent -= Release;
+
+        _moveTween.Kill(); // NOT WORKING NEEDS FIX
             
         if (_holdingSmth)
             _holdingSmth = false;
@@ -67,7 +57,9 @@ public class Grabbable : MonoBehaviour
 
     void Move(Vector3 vector3)
     {
-        _rigidbody.transform.DOMove(new Vector3(vector3.x, vector3.y, grabHeight), speed);
+        _moveTween = _rigidbody.transform.DOMove(new Vector3(vector3.x, vector3.y, grabHeight), speed);
     }
+    
+    
 
 }
