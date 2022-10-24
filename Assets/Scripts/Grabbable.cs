@@ -37,6 +37,8 @@ public class Grabbable : MonoBehaviour
     
     public void Lift()
     {
+        _rigidbody.isKinematic = true;
+        
         _inputManager.MousePosEvent += Move;
         _inputManager.ReleaseEvent += Release;
             
@@ -48,16 +50,21 @@ public class Grabbable : MonoBehaviour
     {
         _inputManager.MousePosEvent -= Move;
         _inputManager.ReleaseEvent -= Release;
+        
+        DOTween.Kill(_rigidbody);
+        
+        _rigidbody.isKinematic = false;
 
-        _moveTween.Kill(); // NOT WORKING NEEDS FIX
-            
         if (_holdingSmth)
             _holdingSmth = false;
     }
 
     void Move(Vector3 vector3)
     {
-        _moveTween = _rigidbody.transform.DOMove(new Vector3(vector3.x, vector3.y, grabHeight), speed);
+        if (_moveTween != null)
+            _moveTween = _rigidbody.DOMove(new Vector3(vector3.x, vector3.y, grabHeight), speed);
+        else
+            _moveTween = new Vector3(vector3.x, vector3.y, grabHeight);
     }
     
     
