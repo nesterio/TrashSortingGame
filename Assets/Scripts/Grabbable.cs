@@ -13,7 +13,7 @@ public class Grabbable : MonoBehaviour
     private InputManager _inputManager = InputManager.Instance;
 
     float grabHeight = -1.7f;
-    private float speed = 1f;
+    private float speed = 0.1f;
 
     private Tween _moveTween;
 
@@ -61,10 +61,7 @@ public class Grabbable : MonoBehaviour
 
     void Move(Vector3 vector3)
     {
-        if (_moveTween != null)
-            _moveTween = _rigidbody.DOMove(new Vector3(vector3.x, vector3.y, grabHeight), speed);
-        else
-            _moveTween = new Vector3(vector3.x, vector3.y, grabHeight);
+        _moveTween = _rigidbody.DOMove(new Vector3(vector3.x, vector3.y, grabHeight), speed);
     }
     
     
