@@ -10,10 +10,9 @@ public class Grabbable : MonoBehaviour
 
     private bool _holdingSmth;
 
-    private InputManager _inputManager = InputManager.Instance;
-
-    float grabHeight = -1.7f;
-    private float speed = 0.1f;
+    private readonly InputManager _inputManager = InputManager.Instance;
+    
+    private readonly float _speed = 7.5f;
 
     private Tween _moveTween;
 
@@ -22,23 +21,19 @@ public class Grabbable : MonoBehaviour
         Initialize();
     }
     
-    public void Initialize()
+    private void Initialize()
     {
         if (_rigidbody == null)
             _rigidbody = GetComponent<Rigidbody>();
         
-        //TODO: ?? Move this to separate PlayerController class ??
         if (_rigidbody == null)
         { 
             _rigidbody = gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
         }
-        //
     }
     
     public void Lift()
     {
-        _rigidbody.isKinematic = true;
-        
         _inputManager.MousePosEvent += Move;
         _inputManager.ReleaseEvent += Release;
             
@@ -50,10 +45,6 @@ public class Grabbable : MonoBehaviour
     {
         _inputManager.MousePosEvent -= Move;
         _inputManager.ReleaseEvent -= Release;
-        
-        DOTween.Kill(_rigidbody);
-        
-        _rigidbody.isKinematic = false;
 
         if (_holdingSmth)
             _holdingSmth = false;
@@ -61,7 +52,7 @@ public class Grabbable : MonoBehaviour
 
     void Move(Vector3 vector3)
     {
-        _moveTween = _rigidbody.DOMove(new Vector3(vector3.x, vector3.y, grabHeight), speed);
+        _rigidbody.velocity = (vector3 - transform.position) * _speed;
     }
     
     
