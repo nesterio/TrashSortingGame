@@ -14,11 +14,8 @@ public class MainMenuManager : MonoBehaviour
     
     [Header("Panels")]
     [SerializeField] Transform Canvas;
-    [SerializeField] Transform startPanel;
-    [SerializeField] Transform shopPanel;
-    [SerializeField] Transform settingsPanel;
-    [SerializeField] GameObject playPanel;
-    [SerializeField] GameObject exitPanel;
+    
+    [SerializeField] private RectTransform PanelsParent;
 
     [Space(5)] 
     
@@ -35,20 +32,19 @@ public class MainMenuManager : MonoBehaviour
     [Space(5)]
     
     [Header("Positions")]
-    [SerializeField] Vector3 startPosition;
-    [SerializeField] Vector3 shopPosition;
-    [SerializeField] Vector3 settingsPosition;
+    [SerializeField] Vector2 startPosition;
+    [SerializeField] Vector2 shopPosition;
+    [SerializeField] Vector2 settingsPosition;
     [Space]
     [SerializeField] float recoil;
     [SerializeField] private float recoilSpeed;
 
     
     
-    private Transform _currentPanel;
+    private RectTransform _currentPanel;
 
     void Start()
     {
-        _currentPanel = startPanel;
         InitializeButtons();
     }
 
@@ -59,7 +55,7 @@ public class MainMenuManager : MonoBehaviour
         {
             shopClickable.AssignClickAction(() =>
             {
-                OpenPanel(shopPanel, shopPosition);
+                OpenPanel(shopPosition);
             });
         }
         var closeShopClickable = CloseShopButton.GetComponent<BasicClickableUI>();
@@ -67,7 +63,7 @@ public class MainMenuManager : MonoBehaviour
         {
             closeShopClickable.AssignClickAction(() =>
             {
-                OpenPanel(startPanel, shopPosition);
+                OpenPanel(startPosition);
             });
         }
         var settingsClickable = OpenSettingsButton.GetComponent<BasicClickableUI>();
@@ -75,7 +71,7 @@ public class MainMenuManager : MonoBehaviour
         {
             settingsClickable.AssignClickAction(() =>
             {
-                OpenPanel(settingsPanel, settingsPosition);
+                OpenPanel(settingsPosition);
             });
         }
         var closeSettingsClickable = CloseSettingsButton.GetComponent<BasicClickableUI>();
@@ -83,7 +79,7 @@ public class MainMenuManager : MonoBehaviour
         {
             closeSettingsClickable.AssignClickAction(() =>
             {
-                OpenPanel(startPanel, settingsPosition);
+                OpenPanel(startPosition);
             });
         }
         var playClickable = PlayButton.GetComponent<BasicClickableUI>();
@@ -110,19 +106,19 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    void OpenPanel(Transform newPanel, Vector3 posForOldPanel)
+    void OpenPanel(Vector2 position)
     {
-        if (newPanel == null)
+        if (PanelsParent == null)
             return;
 
-        DOTween.Sequence()
-            .Append(newPanel.DOMove
-            (startPosition + new Vector3
-                (posForOldPanel.x > 0 ? -recoil : recoil, 0, 0), _swipeAnimationDuration))
-            .Append( newPanel.DOMove(startPosition, recoilSpeed));
-        
-        _currentPanel.DOMove(posForOldPanel, _swipeAnimationDuration);
+        var oldPos = PanelsParent.anchoredPosition;
 
-        _currentPanel = newPanel;
+        DOTween.Sequence()
+            .Append(PanelsParent.DOAnchorPos
+            (position + new Vector2
+                (position.x - oldPos.x > 0 ? recoil : -recoil, 0), _swipeAnimationDuration))
+            .Append(PanelsParent.DOAnchorPos(position, recoilSpeed));
+
+        _currentPanel = PanelsParent;
     }
 }
