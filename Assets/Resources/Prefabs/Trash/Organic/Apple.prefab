@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 467518573038033682}
   - component: {fileID: 4340865319675109617}
   - component: {fileID: 966564197901412952}
+  - component: {fileID: -1362032683766527204}
   m_Layer: 0
   m_Name: Apple
   m_TagString: Trash
@@ -208,3 +209,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 467518573038033682}
+--- !u!114 &-1362032683766527204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5665058053843303338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76317dbd48290546ba856a87fe75b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 467518573038033682}
+  trashObject: {fileID: 5665058053843303338}
