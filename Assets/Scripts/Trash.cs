@@ -5,19 +5,19 @@ using UnityEngine;
 public class Trash : Grabbable
 {
     [SerializeField] GameObject trashObject;
-    static float jumpTrash;
-    static float massTrash;
+    [SerializeField]private float jumpingAbilityTrash;
+    [SerializeField]private float massTrash;
 
     private void Start()
     {
         trashObject.tag = "Trash";
 
         _rigidbody.mass = massTrash;
-        _rigidbody.drag = jumpTrash;
+        _rigidbody.drag =jumpingAbilityTrash;
     }
 }
 enum TrashType
 {
-    Glas,
+    Glass,
     Organic
 }
