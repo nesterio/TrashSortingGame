@@ -12,12 +12,24 @@ public class ScoreManager : MonoBehaviour
     {
         Instance = this;
     }
+
+    private ScoreManager()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
     #endregion
 
     [SerializeField] private TextMeshPro highScoreText;
     [SerializeField] private TextMeshPro scoreText;
-    private int Score;
-    private int HighScore = 0;
+    private int score;
+    private int highScore = 0;
 
     private void Start()
     {
@@ -26,18 +38,18 @@ public class ScoreManager : MonoBehaviour
 
     private void SetScoreTexts()
     {
-        scoreText.text = "Score: " + Score;
+        scoreText.text = "Score: " + score;
         highScoreText.text = "HighScore: " + PlayerPrefs.GetInt("HighScore");
-        if(Score > HighScore)
+        if(score > highScore)
         {
-            HighScore = Score;
-            PlayerPrefs.SetInt("HighScore", HighScore);
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore", highScore);
             highScoreText.text = "High score " + PlayerPrefs.GetInt("HighScore");
         }
     }
     private void AddScore()
     {
-        Score = Random.Range(1, 10) * 10;
+        score = Random.Range(1, 10) * 10;
         SetScoreTexts();
     }
 
