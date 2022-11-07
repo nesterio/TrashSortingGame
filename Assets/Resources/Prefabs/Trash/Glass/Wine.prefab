@@ -367,3 +367,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 8911736922700227426}
   trashObject: {fileID: 8911736922700227439}
+  _collider: {fileID: 8911736922700227436}
+  Bounciness: 0.1
+  massTrash: 0
