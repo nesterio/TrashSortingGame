@@ -7,13 +7,9 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     #region Singleton
+    [HideInInspector]
     public static ScoreManager Instance;
     private void Awake()
-    {
-        Instance = this;
-    }
-
-    private ScoreManager()
     {
         if (Instance == null)
         {
@@ -26,27 +22,33 @@ public class ScoreManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField] private int minScore = 1;
+    [SerializeField] private int maxScore = 10;
+    [Space(5)]
     [SerializeField] private TextMeshPro highScoreText;
     [SerializeField] private TextMeshPro scoreText;
-    private int score;
-    private int highScore = 0;
+    public int score { get; private set; }
+    public int highScore{ get; private set; } = 0;
 
     private void Start()
     {
+        highScore = PlayerPrefs.GetInt("HighScore");
+        highScoreText.text = "HighScore: " + highScore;
         SetScoreTexts();
     }
 
     private void SetScoreTexts()
     {
         scoreText.text = "Score: " + score;
-        highScoreText.text = "HighScore: " + PlayerPrefs.GetInt("HighScore");
         if(score > highScore)
         {
             highScore = score;
             PlayerPrefs.SetInt("HighScore", highScore);
-            highScoreText.text = "High score " + PlayerPrefs.GetInt("HighScore");
+            highScoreText.text = "High score " + highScore;
         }
     }
+    
+
     private void AddScore()
     {
         score = Random.Range(1, 10) * 10;

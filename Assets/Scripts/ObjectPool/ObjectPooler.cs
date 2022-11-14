@@ -5,10 +5,9 @@ using UnityEngine;
 public class ObjectPooler : MonoBehaviour
 {
     public static ObjectPooler Instance;
-    private void Awake()
-    {
-        Instance = this;
-    }
+
+    public int TrashPrefabsCount = 3;
+    public int PoolPrefabsCount = 5;
 
     [System.Serializable]
     public struct PoolType
@@ -20,9 +19,8 @@ public class ObjectPooler : MonoBehaviour
     [System.Serializable]
     public struct Pool
     {
-        public string tag;
-        public GameObject prefab;
-        public int size;
+        [InspectorName("Tag")]public string tag;
+        [InspectorName("Prefab")]public GameObject prefab;
     }
 
     public List<Pool> objectPools;
@@ -32,8 +30,13 @@ public class ObjectPooler : MonoBehaviour
     private Dictionary<TrashType, Dictionary<string, Queue<GameObject>>> trashPoolTypesDict;
     
 
-    private void Start()
+    private void Awake()
     {
+        if(Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+
         //// Initialize trash object pool ////
         trashPoolTypesDict = new Dictionary<TrashType, Dictionary<string, Queue<GameObject>>>();
         foreach (var poolType in trashPoolTypes)
@@ -43,8 +46,11 @@ public class ObjectPooler : MonoBehaviour
             {
                 Queue<GameObject> objectPool = new Queue<GameObject>();
 
-                for(int i = 0; i<pool.size; i++)
+                for(int i = 0; i < TrashPrefabsCount; i++)
                 {
+                    if(pool.prefab == null)
+                        continue;
+                    
                     GameObject obj = Instantiate(pool.prefab);
                     obj.SetActive(false);
                     objectPool.Enqueue(obj);               
@@ -61,7 +67,7 @@ public class ObjectPooler : MonoBehaviour
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
 
-            for(int i = 0; i<pool.size; i++)
+            for(int i = 0; i < PoolPrefabsCount; i++)
             {
                 GameObject obj = Instantiate(pool.prefab);
                 obj.SetActive(false);
@@ -74,8 +80,17 @@ public class ObjectPooler : MonoBehaviour
 
     public GameObject SpawnRandomTrash(Vector3 position, Quaternion rotation)
     {
-        var poolDict = trashPoolTypesDict[RandomTrashType()];
+        Debug.Log("trying to spawn trash");
 
+        //// TODO: DEFINE UNLOCKED TRASH TYPES
+        var trashType = RandomTrashType();
+        while (trashPoolTypesDict.ContainsKey(trashType) == false)
+        {
+            trashType = RandomTrashType();
+        }
+        var poolDict = trashPoolTypesDict[trashType];
+        //// //// ////
+        
         var pool = new Queue<GameObject>(RandomValues(poolDict).First());
         
         GameObject objectToSpawn = pool.Dequeue();
@@ -84,7 +99,7 @@ public class ObjectPooler : MonoBehaviour
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
 
-        objectPoolsDict[tag].Enqueue(objectToSpawn);
+        trashPoolTypesDict[trashType][tag].Enqueue(objectToSpawn);
 
         return objectToSpawn;
 

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3093543198428417263
 Transform:
   m_ObjectHideFlags: 0
@@ -352,7 +352,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 8911736922700227426}
-  trashObject: {fileID: 8911736922700227439}
+  trashType: 0
+  hasVariation: 1
+  variationObjects:
+  - {fileID: 6188863495052589352}
+  - {fileID: 1140149323976374568}
   _collider: {fileID: 8911736922700227436}
-  Bounciness: 0.1
-  massTrash: 0
+  _bounciness: 0
+  _weight: 0

@@ -208,7 +208,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 467518573038033682}
-  trashObject: {fileID: 5665058053843303338}
+  trashType: 0
+  hasVariation: 1
+  variationObjects:
+  - {fileID: 2429775650285486113}
   _collider: {fileID: 4340865319675109617}
-  Bounciness: 0
-  massTrash: 0
+  _bounciness: 0
+  _weight: 0
