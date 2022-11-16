@@ -90,10 +90,8 @@ public class ObjectPooler : MonoBehaviour
         callback?.Invoke();
     }
 
-    public GameObject SpawnRandomTrash(Vector3 position, Quaternion rotation)
+    public GameObject SpawnRandomTrash(Vector3 position)
     {
-        Debug.Log("trying to spawn trash");
-
         //// TODO: DEFINE UNLOCKED TRASH TYPES
         var trashType = RandomTrashType();
         while (trashPoolTypesDict.ContainsKey(trashType) == false)
@@ -102,16 +100,17 @@ public class ObjectPooler : MonoBehaviour
         }
         var poolDict = trashPoolTypesDict[trashType];
         //// //// ////
-        
-        var pool = new Queue<GameObject>(RandomValues(poolDict).First());
+
+        var poolTag = RandomValues(poolDict).First();
+
+        var pool = new Queue<GameObject>(poolDict[poolTag]);
         
         GameObject objectToSpawn = pool.Dequeue();
         
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
-        objectToSpawn.transform.rotation = rotation;
 
-        trashPoolTypesDict[trashType][tag].Enqueue(objectToSpawn);
+        trashPoolTypesDict[trashType][poolTag].Enqueue(objectToSpawn);
 
         return objectToSpawn;
 
@@ -122,10 +121,10 @@ public class ObjectPooler : MonoBehaviour
         }
     }
     
-    private static IEnumerable<TValue> RandomValues<TKey, TValue>(IDictionary<TKey, TValue> dict)
+    private static IEnumerable<TKey> RandomValues<TKey, TValue>(IDictionary<TKey, TValue> dict)
     {
         var rand = new System.Random();
-        var values = dict.Values.ToList();
+        var values = dict.Keys.ToList();
         var size = dict.Count;
         while(true)
         {

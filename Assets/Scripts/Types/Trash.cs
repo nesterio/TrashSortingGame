@@ -6,13 +6,20 @@ using Random = UnityEngine.Random;
 public class Trash : Grabbable
 {
     public TrashType trashType;
+    
     [Space(10)]
+    
     [SerializeField] private bool hasVariation;
     [SerializeField] private GameObject[] variationObjects;
     private GameObject variationObj;
-    [Space(10)] [SerializeField] private Quaternion originalRotation = new quaternion();
+    
     [Space(10)]
-    [SerializeField] Collider _collider;
+    
+    public Quaternion originalRotation = new quaternion();
+
+    [Space(10)]
+    
+    [SerializeField] Collider[] _colliders;
     [SerializeField] float _bounciness;
     [SerializeField] float _weight;
     
@@ -24,7 +31,10 @@ public class Trash : Grabbable
 
         PhysicMaterial trashMaterial = new PhysicMaterial();        
         trashMaterial.bounciness = _bounciness;
-        _collider.material = trashMaterial;
+        foreach (var col in _colliders)
+        {
+            col.material = trashMaterial;
+        }
     }
     
     private void OnEnable()
@@ -35,7 +45,7 @@ public class Trash : Grabbable
         if (hasVariation && variationObj != null)
             variationObj.SetActive(Random.Range(0, 1) != 0);
 
-        transform.rotation = originalRotation;
+        transform.localRotation = originalRotation;
     }
 
     private void OnDisable()

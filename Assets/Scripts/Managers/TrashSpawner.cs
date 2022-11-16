@@ -55,7 +55,7 @@ namespace Managers
         }
 
         // Spawn cycle
-        public static IEnumerator Spawner()
+        public static IEnumerator Spawner(Action callback = null)
         {
             float timeToWait = scoreManager.score == 0 ? defaultSpawnRate 
                 : defaultSpawnRate / (scoreManager.score * diffictulty);
@@ -68,11 +68,13 @@ namespace Managers
             {
                 if (objectPooler != null)
                 {
-                    objectPooler.SpawnRandomTrash(trashSpawnPos, Quaternion.identity);
+                    objectPooler.SpawnRandomTrash(trashSpawnPos);
                 }
 
                 yield return waitTime;
             }
+            
+            callback?.Invoke();
         }
     }
 }

@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 7129621421161753518}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 30, y: 30, z: 30}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -53,7 +53,9 @@ MonoBehaviour:
   hasVariation: 0
   variationObjects: []
   originalRotation: {x: -0.70710677, y: 0, z: 0, w: 0.70710677}
-  _collider: {fileID: 7016170937485607432}
+  _colliders:
+  - {fileID: 7016170937485607432}
+  - {fileID: 5330444197734128958}
   _bounciness: 0
   _weight: 0
 --- !u!33 &1732048481382913804
@@ -120,7 +122,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 56
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &7016170937485607432
 BoxCollider:
   m_ObjectHideFlags: 0

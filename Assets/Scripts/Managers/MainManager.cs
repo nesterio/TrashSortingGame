@@ -24,11 +24,11 @@ public class MainManager : MonoBehaviour
 
     public void StartSpawning()
     {
-        if (TrashSpawner.IsSpawning == true) 
+        if (TrashSpawner.IsSpawning) 
             return;
         
         TrashSpawner.IsSpawning = true;
-        StartCoroutine(TrashSpawner.Spawner());
+        StartCoroutine(TrashSpawner.Spawner(StartSpawning));
     }
 
     public void PauseSpawning()
