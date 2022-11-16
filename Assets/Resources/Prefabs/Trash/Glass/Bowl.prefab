@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5852340357947370635}
+  - component: {fileID: 443709879589860112}
   - component: {fileID: 7392776544154657582}
   - component: {fileID: 4718818380213999588}
   - component: {fileID: 3044881835177430539}
   - component: {fileID: 2514932042189249164}
-  - component: {fileID: 443709879589860112}
   m_Layer: 0
   m_Name: Bowl
   m_TagString: Untagged
@@ -35,6 +35,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &443709879589860112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6520192055217681969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76317dbd48290546ba856a87fe75b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 3044881835177430539}
+  trashType: 0
+  hasVariation: 0
+  variationObjects: []
+  originalRotation: {x: -0.70710677, y: 0, z: 0, w: 0.70710677}
+  _collider: {fileID: 2514932042189249164}
+  _bounciness: 0
+  _weight: 0
 --- !u!33 &7392776544154657582
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -114,22 +134,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.010688873, y: 0.010688877, z: 0.0045710905}
   m_Center: {x: 0, y: 4.656614e-10, z: 0.0022855452}
---- !u!114 &443709879589860112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6520192055217681969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e76317dbd48290546ba856a87fe75b87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 3044881835177430539}
-  trashType: 0
-  hasVariation: 0
-  variationObj: {fileID: 6520192055217681969}
-  _collider: {fileID: 2514932042189249164}
-  _bounciness: 0
-  _weight: 0

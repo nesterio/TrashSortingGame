@@ -1,10 +1,18 @@
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
 public static class FileManager
 {
-    private const string defaultPrefabPath = "Assets/Resources/Prefabs";
+    private const string defaultPrefabPath = "Prefabs";
+
+    public static List<GameObject> LoadAllPrefabs(string path)
+    {
+        Debug.Log(defaultPrefabPath + "/" + path);
+        return Resources.LoadAll<GameObject>(defaultPrefabPath + "/" + path).ToList();
+    }
 
     public static GameObject LoadAndCreatePrefab(string prefabPathOrName, Vector3 position)
     {

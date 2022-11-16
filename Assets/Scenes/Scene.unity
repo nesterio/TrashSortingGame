@@ -2584,7 +2584,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76472708105a9ae469b4af4207934b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pools: []
+  TrashPrefabsCount: 3
+  PoolPrefabsCount: 5
+  objectPools: []
+  trashPoolTypes:
+  - trashType: 0
+    pools:
+    - tag: Bowl
+      prefab: {fileID: 6520192055217681969, guid: d3114c881484647469e00516182f0f8a, type: 3}
+    - tag: Mug
+      prefab: {fileID: 7129621421161753518, guid: 3648bf057d045534882cff098b6adbde, type: 3}
+    - tag: Wine
+      prefab: {fileID: 8911736922700227439, guid: bd34a1377ed191742927270de24ec58e, type: 3}
+  - trashType: 1
+    pools:
+    - tag: Apple
+      prefab: {fileID: 5665058053843303338, guid: 71f67bb6d8794e7479d09260753eaeee, type: 3}
+    - tag: Banana
+      prefab: {fileID: 1196365799397410756, guid: 82366dd4b76878141b441e3329018d31, type: 3}
+  - trashType: 3
+    pools:
+    - tag: Box
+      prefab: {fileID: 8392034060658984425, guid: e3706e737856d114d8c814b0f844acef, type: 3}
+    - tag: Magazine1
+      prefab: {fileID: 2827233083533253076, guid: 89d1754e6f419424d833f04560c97c62, type: 3}
+    - tag: Magazine2
+      prefab: {fileID: 8283003035613008225, guid: d93e2b958432e1b429fabafaf5027212, type: 3}
+    - tag: StackOfPaper
+      prefab: {fileID: 4970305940971217477, guid: 6f690b29be89eb0468d8024fb4924f5a, type: 3}
 --- !u!114 &836735159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2597,6 +2624,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b76133d6323234eb338cc8645fdf5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minScore: 1
+  maxScore: 10
   highScoreText: {fileID: 1220327119}
   scoreText: {fileID: 589777461}
 --- !u!1 &853413652
@@ -5328,7 +5357,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6d1a62f5a060afe4da938f17992d5eb2, type: 2}
+  - {fileID: 2100000, guid: 55b9d8f9dad0b604e8404fc1bcb9b1d4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6419,11 +6448,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5055332465537838096, guid: 62cf302734fa95a48a97a629891243e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.508615
+      value: -0.03
       objectReference: {fileID: 0}
     - target: {fileID: 5055332465537838096, guid: 62cf302734fa95a48a97a629891243e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.685
+      value: 4.44
       objectReference: {fileID: 0}
     - target: {fileID: 5055332465537838096, guid: 62cf302734fa95a48a97a629891243e5, type: 3}
       propertyPath: m_LocalPosition.z

@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5337962755834749839}
+  - component: {fileID: 1885363899941564440}
   - component: {fileID: 1732048481382913804}
   - component: {fileID: 6865617213646113281}
-  - component: {fileID: 1885363899941564440}
   - component: {fileID: 4527631507711125142}
   - component: {fileID: 7016170937485607432}
   - component: {fileID: 5330444197734128958}
@@ -36,6 +36,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &1885363899941564440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7129621421161753518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76317dbd48290546ba856a87fe75b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 4527631507711125142}
+  trashType: 0
+  hasVariation: 0
+  variationObjects: []
+  originalRotation: {x: -0.70710677, y: 0, z: 0, w: 0.70710677}
+  _collider: {fileID: 7016170937485607432}
+  _bounciness: 0
+  _weight: 0
 --- !u!33 &1732048481382913804
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -85,25 +105,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1885363899941564440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7129621421161753518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e76317dbd48290546ba856a87fe75b87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 4527631507711125142}
-  trashType: 0
-  hasVariation: 0
-  variationObj: {fileID: 0}
-  _collider: {fileID: 7016170937485607432}
-  _bounciness: 0
-  _weight: 0
 --- !u!54 &4527631507711125142
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -118,7 +119,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!65 &7016170937485607432
 BoxCollider:

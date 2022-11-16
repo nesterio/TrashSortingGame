@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Managers;
 using UnityEngine;
 using Scripts.Clicking;
@@ -5,16 +6,25 @@ public class MainManager : MonoBehaviour
 {
     private ClickDetector ClickDetector;
 
+    public static readonly List<TrashType> AvailableTrashTypes = new List<TrashType>()
+    {
+        TrashType.Glass,
+        TrashType.Organic,
+        TrashType.Paper
+    };
+
     void Start()
     {
         ClickDetector = new ClickDetector();
-
-        StartSpawning();
+        
+        TrashSpawner.InitializeTrashPools(() => 
+            ObjectPooler.Instance.Initialize
+                (StartSpawning));
     }
 
     public void StartSpawning()
     {
-        if (TrashSpawner.IsSpawning != false) 
+        if (TrashSpawner.IsSpawning == true) 
             return;
         
         TrashSpawner.IsSpawning = true;

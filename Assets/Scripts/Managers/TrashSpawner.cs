@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Managers
@@ -16,6 +18,41 @@ namespace Managers
         private static float diffictulty = 0.001f;
 
         private static Vector3 trashSpawnPos = new Vector3(0, 4.4f, -1.7f);
+
+        public static void InitializeTrashPools(Action callback = null)
+        {
+            // Create a pool of pools of trash
+            var trashPoolTypes = new List<ObjectPooler.PoolType>();
+            // Go through available trash types
+            foreach (var type in MainManager.AvailableTrashTypes)
+            {
+                var trashOfType = FileManager.LoadAllPrefabs("Trash/" + type);
+
+                var pools = new List<ObjectPooler.Pool>();
+
+                // Create pools of trash of current type
+                foreach (var trash in trashOfType)
+                {
+                    pools.Add(new ObjectPooler.Pool() 
+                    {
+                            tag = trash.name,
+                            prefab = trash
+                    });
+                }
+
+                // Create a pool of trash pools
+                var poolType = new ObjectPooler.PoolType()
+                {
+                    trashType = type,
+                    pools = pools.ToArray()
+                };
+                
+                trashPoolTypes.Add(poolType);
+            }
+
+            objectPooler.trashPoolTypes = trashPoolTypes;
+            callback?.Invoke();
+        }
 
         // Spawn cycle
         public static IEnumerator Spawner()

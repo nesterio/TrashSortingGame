@@ -90,11 +90,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5032074280322195728}
+  - component: {fileID: -1362032683766527204}
   - component: {fileID: 8249010605880831669}
   - component: {fileID: 6169553503214901887}
   - component: {fileID: 467518573038033682}
   - component: {fileID: 4340865319675109617}
-  - component: {fileID: -1362032683766527204}
   m_Layer: 0
   m_Name: Apple
   m_TagString: Trash
@@ -117,6 +117,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1362032683766527204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5665058053843303338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76317dbd48290546ba856a87fe75b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 467518573038033682}
+  trashType: 0
+  hasVariation: 1
+  variationObjects:
+  - {fileID: 2429775650285486113}
+  originalRotation: {x: 0, y: 0, z: 0, w: 0}
+  _collider: {fileID: 4340865319675109617}
+  _bounciness: 0
+  _weight: 0
 --- !u!33 &8249010605880831669
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -195,23 +216,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.027129946
   m_Center: {x: 0.0011168628, y: 0.02407208, z: 0}
---- !u!114 &-1362032683766527204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5665058053843303338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e76317dbd48290546ba856a87fe75b87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 467518573038033682}
-  trashType: 0
-  hasVariation: 1
-  variationObjects:
-  - {fileID: 2429775650285486113}
-  _collider: {fileID: 4340865319675109617}
-  _bounciness: 0
-  _weight: 0

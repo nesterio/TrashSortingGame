@@ -1,21 +1,21 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ObjectPooler : MonoBehaviour
 {
+    //// Singleton ////
     public static ObjectPooler Instance;
-
-    public int TrashPrefabsCount = 3;
-    public int PoolPrefabsCount = 5;
-
-    [System.Serializable]
+    
+    //// Pool structs /////
+    //[System.Serializable]
     public struct PoolType
     {
         public TrashType trashType;
         public Pool[] pools;
     }
-
     [System.Serializable]
     public struct Pool
     {
@@ -23,12 +23,19 @@ public class ObjectPooler : MonoBehaviour
         [InspectorName("Prefab")]public GameObject prefab;
     }
 
+    //// Amount of prefabs in a pool /////
+    public int TrashPrefabsCount = 3;
+    public int PoolPrefabsCount = 5;
+    
+    [Space(10)]
+    
+    //// Pools ////
     public List<Pool> objectPools;
     private Dictionary<string, Queue<GameObject>> objectPoolsDict;
     [Space(5)]
     public List<PoolType> trashPoolTypes;
     private Dictionary<TrashType, Dictionary<string, Queue<GameObject>>> trashPoolTypesDict;
-    
+
 
     private void Awake()
     {
@@ -36,7 +43,10 @@ public class ObjectPooler : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+    }
 
+    public void Initialize(Action callback = null)
+    {
         //// Initialize trash object pool ////
         trashPoolTypesDict = new Dictionary<TrashType, Dictionary<string, Queue<GameObject>>>();
         foreach (var poolType in trashPoolTypes)
@@ -76,6 +86,8 @@ public class ObjectPooler : MonoBehaviour
             
             objectPoolsDict.Add(pool.tag, objectPool);
         }
+        
+        callback?.Invoke();
     }
 
     public GameObject SpawnRandomTrash(Vector3 position, Quaternion rotation)
@@ -103,26 +115,10 @@ public class ObjectPooler : MonoBehaviour
 
         return objectToSpawn;
 
-        TrashType RandomTrashType() // TODO: Improve by checking what trash types have been unlocked. Also needs to be organized
+        TrashType RandomTrashType()
         {
-            switch (Random.Range(0, 6))
-            {
-                default:
-                case 0:
-                    return TrashType.Glass;
-                case 1:
-                    return TrashType.Metal;
-                case 2:
-                    return TrashType.Mixed;
-                case 3:
-                    return TrashType.Organic;
-                case 4:
-                    return TrashType.Paper;
-                case 5:
-                    return TrashType.Plastic;
-                case 6:
-                    return TrashType.Valuable;
-            }
+            int id = Random.Range(0, MainManager.AvailableTrashTypes.Count);
+            return MainManager.AvailableTrashTypes[id];
         }
     }
     
