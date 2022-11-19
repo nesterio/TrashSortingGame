@@ -22,6 +22,10 @@ public class Trash : Grabbable
     [SerializeField] Collider[] _colliders;
     [SerializeField] float _bounciness;
     [SerializeField] float _weight;
+
+    [Space(10)]
+
+    private bool isHolded;
     
     private void Start()
     {
@@ -35,8 +39,9 @@ public class Trash : Grabbable
         {
             col.material = trashMaterial;
         }
+        isHolded = false;
     }
-    
+
     private void OnEnable()
     {
         if(hasVariation && variationObjects.Length > 0)
@@ -52,5 +57,15 @@ public class Trash : Grabbable
     {
         if (hasVariation && variationObj != null)
             variationObj.SetActive(true);
+    }
+    public override void Lift()
+    {
+        isHolded = true;
+        base.Lift();
+    }
+    public override void Release()
+    {
+        isHolded = false;
+        base.Release();
     }
 }

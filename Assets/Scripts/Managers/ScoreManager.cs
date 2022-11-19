@@ -49,7 +49,7 @@ public class ScoreManager : MonoBehaviour
     }
     
 
-    private void AddScore()
+    public void AddScore()
     {
         score = Random.Range(1, 10) * 10;
         SetScoreTexts();
