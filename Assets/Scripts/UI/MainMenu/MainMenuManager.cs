@@ -53,7 +53,7 @@ public class MainMenuManager : MonoBehaviour
         {
             shopClickable.AssignClickAction(() =>
             {
-                OpenPanel(shopPosition);
+                OpenPanel(settingsPosition);
             });
         }
         var closeShopClickable = CloseShopButton.GetComponent<BasicClickableUI>();
@@ -69,7 +69,7 @@ public class MainMenuManager : MonoBehaviour
         {
             settingsClickable.AssignClickAction(() =>
             {
-                OpenPanel(settingsPosition);
+                OpenPanel(shopPosition);
             });
         }
         var closeSettingsClickable = CloseSettingsButton.GetComponent<BasicClickableUI>();
