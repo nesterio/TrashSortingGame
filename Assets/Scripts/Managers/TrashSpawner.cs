@@ -57,8 +57,8 @@ namespace Managers
         // Spawn cycle
         public static IEnumerator Spawner(Action callback = null)
         {
-            float timeToWait = scoreManager.score == 0 ? defaultSpawnRate 
-                : defaultSpawnRate / (scoreManager.score * diffictulty);
+            float timeToWait = scoreManager.Score == 0 ? defaultSpawnRate 
+                : defaultSpawnRate / (scoreManager.Score * diffictulty);
             timeToWait = Mathf.Max(timeToWait, 1);
             
             WaitForSeconds waitTime = new WaitForSeconds(timeToWait);
