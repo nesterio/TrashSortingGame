@@ -27,7 +27,7 @@ public class Grabbable : MonoBehaviour
         _inputManager.ReleaseEvent += Release;
     }
 
-    protected virtual void Release()
+    public virtual void Release()
     {
         _inputManager.MousePosEvent -= Move;
         _inputManager.ReleaseEvent -= Release;
