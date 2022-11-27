@@ -1,24 +1,56 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class ClickMaterialType : MonoBehaviour
+namespace Particle
 {
-    private Color _darkColor;
-    private Color _lightColor;
-    private AudioMixer _sound;
-    private int _numberParticle;
-    private void Start()
+    public class ClickMaterialType
     {
-        var allParticles = Resources.LoadAll<ClickMaterial>("");
-        foreach (var particle in allParticles)
+        #region clicking
+        readonly  InputManager _inputManager = InputManager.Instance;
+
+        public ClickMaterialType()
         {
-            _darkColor = particle.DarkColor;
-            _lightColor = particle.LightColor;
-            _sound = particle.Sound;
-            _numberParticle = particle.NumberParticle;
+            if (_inputManager != null)
+            {
+                _inputManager.ClickEvent += OnClick;
+            }
+        }
+
+        private void OnClick()
+        {
+            CliCkUnclickable();
+        }
+        #endregion
+    
+        private Color _darkColor;
+        private Color _lightColor;
+        private AudioMixer _sound;
+        private int _numberParticle;
+        private void Start()
+        {
+            var allParticles = Resources.LoadAll<ClickMaterial>("");
+            foreach (var particle in allParticles)
+            {
+                _darkColor = particle.DarkColor;
+                _lightColor = particle.LightColor;
+                _sound = particle.Sound;
+                _numberParticle = particle.NumberParticle;
+            }
+        }
+
+        private void CliCkUnclickable()
+        {
+            RaycastHit raycastHit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawLine ( ray.origin, ray.origin + ray.direction * 100, Color.red );
+
+            if (Physics.Raycast(ray, out raycastHit, 100f))
+            {
+                if (raycastHit.transform.gameObject.CompareTag("Clickable"))
+                {
+                    Debug.Log("Good");
+                }
+            }
         }
     }
 }
