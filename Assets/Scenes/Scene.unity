@@ -2500,7 +2500,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TrashPrefabsCount: 3
   PoolPrefabsCount: 5
-  objectPools: []
+  objectPools:
+  - tag: Particle
+    prefab: {fileID: 0}
 --- !u!114 &836735159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3310,7 +3312,7 @@ GameObject:
   - component: {fileID: 1122470808}
   m_Layer: 0
   m_Name: Trigger
-  m_TagString: Clickable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

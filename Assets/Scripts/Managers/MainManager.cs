@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using Managers;
+using Particle;
 using UnityEngine;
 using Scripts.Clicking;
 public class MainManager : MonoBehaviour
 {
+    private ClickMaterialType ClickMaterialType;
+    
     private ClickDetector ClickDetector;
 
     public static readonly List<TrashType> AvailableTrashTypes = new List<TrashType>()
@@ -15,6 +18,8 @@ public class MainManager : MonoBehaviour
 
     void Start()
     {
+        ClickMaterialType = new ClickMaterialType(); //starting the particle system
+        
         ClickDetector = new ClickDetector();
         
         TrashSpawner.InitializeTrashPools(() => 

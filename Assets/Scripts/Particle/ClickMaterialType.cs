@@ -49,6 +49,7 @@ namespace Particle
                 if (raycastHit.transform.gameObject.CompareTag("Clickable"))
                 {
                     Debug.Log("Good");
+                    ObjectPooler.Instance.SpawnFromPool("Particle", raycastHit.transform.position, Quaternion.LookRotation(raycastHit.normal));
                 }
             }
         }
