@@ -2183,7 +2183,7 @@ BoxCollider:
   m_GameObject: {fileID: 1410881594995575}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.9999999, y: 0.9999999, z: 3.78843}
   m_Center: {x: 0, y: 0.49999994, z: 0.51936287}
@@ -2293,7 +2293,7 @@ BoxCollider:
   m_GameObject: {fileID: 1410880590583679}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.9999999, y: 0.9999999, z: 3.78843}
   m_Center: {x: 0, y: 0.49999994, z: 0.51936287}
@@ -2502,7 +2502,7 @@ MonoBehaviour:
   PoolPrefabsCount: 5
   objectPools:
   - tag: Particle
-    prefab: {fileID: 0}
+    prefab: {fileID: 417296496964897333, guid: 487d6d5f56332b340b89f9691f4099b0, type: 3}
 --- !u!114 &836735159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3085,7 +3085,7 @@ GameObject:
   - component: {fileID: 996775359}
   m_Layer: 0
   m_Name: Frame1
-  m_TagString: Clickable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3883,7 +3883,7 @@ GameObject:
   - component: {fileID: 1407811828}
   m_Layer: 0
   m_Name: Hole
-  m_TagString: Untagged
+  m_TagString: Clickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4242,7 +4242,7 @@ GameObject:
   - component: {fileID: 1554064834}
   m_Layer: 0
   m_Name: Hole
-  m_TagString: Untagged
+  m_TagString: Clickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5044,7 +5044,7 @@ GameObject:
   - component: {fileID: 1777091521}
   m_Layer: 0
   m_Name: Hole
-  m_TagString: Untagged
+  m_TagString: Clickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5295,7 +5295,7 @@ GameObject:
   - component: {fileID: 1960960463}
   m_Layer: 0
   m_Name: Hole
-  m_TagString: Untagged
+  m_TagString: Clickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5391,7 +5391,7 @@ GameObject:
   - component: {fileID: 1987234090}
   m_Layer: 0
   m_Name: Hole
-  m_TagString: Untagged
+  m_TagString: Clickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5756,7 +5756,7 @@ GameObject:
   - component: {fileID: 2104915423}
   m_Layer: 0
   m_Name: Hole
-  m_TagString: Untagged
+  m_TagString: Clickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
