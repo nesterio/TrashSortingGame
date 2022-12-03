@@ -20,10 +20,7 @@ public class MainManager : MonoBehaviour
         ClickDetector = new ClickDetector();
         ResolutionManager = new ResolutionManager();
         
-        Debug.Log("CameraPosZ: "+ResolutionManager.CameraPosZ);
-        var transformPosition = Camera.main.transform.position;
-        transformPosition.z = ResolutionManager.CameraPosZ;
-        Camera.main.transform.position = transformPosition;
+        ResolutionManager.SetCameraPosition(ResolutionManager.CameraPosZ);
 
         TrashSpawner.InitializeTrashPools(() => 
             ObjectPooler.Instance.Initialize
