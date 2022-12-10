@@ -3,7 +3,12 @@ guid: 958805683c75bb14f8884d1d1188efa9
 ModelImporter:
   serializedVersion: 20300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: perfrume
+    second: {fileID: 2100000, guid: b7aaf96ede252654f8ab086d351b3fa3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

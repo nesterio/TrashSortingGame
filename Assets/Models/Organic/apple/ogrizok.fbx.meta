@@ -3,7 +3,12 @@ guid: 18a66600071ffa64c8de7ef29a8a0de7
 ModelImporter:
   serializedVersion: 20300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ogrizok_ogrizok1
+    second: {fileID: 2100000, guid: 4d97b7f9afdae0943b1a39c790a74034, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
