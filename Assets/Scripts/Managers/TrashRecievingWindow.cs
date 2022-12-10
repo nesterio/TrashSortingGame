@@ -1,50 +1,69 @@
 using System.Collections;
-using System.Collections.Generic;
+using Managers;
+using Types;
 using UnityEngine;
 
 public class TrashRecievingWindow : MonoBehaviour
 {
-    [SerializeField] Collider trashBox;
-
+    private readonly int difficulty = 1;
     private float initalDuration = 3;
-    private float _currentDuration;
-    private int level = 1;
-
+    private float CurrentDuration => initalDuration - initalDuration * difficulty / 10;
+    
     public TrashType trashType;
-
-    private void Start()
-    {
-        _currentDuration = initalDuration - initalDuration * level / 10;
-    }
+    private bool _isAvailable = true;
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Trash") //Add a click check
-        {
-            if (col.gameObject.CompareTag("Trash"))
-            {
-                col.gameObject.SetActive(false);
-                trashBox.isTrigger = false;
-                StartCoroutine(TimerTrashBox());
-                Debug.Log("Is trash");
-
-            }
-            else
-            {
-                Debug.Log("Error");
-            }
-        }
+        if(_isAvailable == false)
+            return;
+        
+        if (col.gameObject == MainManager.HoldedObject 
+            && MainManager.HoldedObject.CompareTag("Trash"))
+            InputManager.Instance.ReleaseEvent += ProcessObject;
         else
-        {
-            Debug.Log("Error");
-        }
-
+            Break();
     }
-    IEnumerator TimerTrashBox()
+
+    private void OnTriggerExit(Collider col)
     {
+        if (col.gameObject == MainManager.HoldedObject 
+            && MainManager.HoldedObject.CompareTag("Trash"))
+            InputManager.Instance.ReleaseEvent -= ProcessObject;
+    }
+
+    private void ProcessObject()
+    {
+        if(MainManager.HoldedObject == null)
+            return;
+        
+        var trash = MainManager.HoldedObject.GetComponent<Trash>();
+
+        if (trash.trashType == trashType)
+            AcceptTrash();
+        else
+            Break();
+    }
+
+    private void AcceptTrash()
+    {
+        _isAvailable = false;
+            
+        MainManager.HoldedObject.SetActive(false);
         ScoreManager.Instance.AddScore();
-        yield return new WaitForSeconds(_currentDuration);
-        Debug.Log("Box ready");
-        trashBox.isTrigger = true;
+        
+        StartCoroutine(TrashProcessingTimer());
+    }
+
+    private void Break()
+    {
+        // TODO
+        _isAvailable = false;
+        StartCoroutine(TrashProcessingTimer());
+    }
+
+    IEnumerator TrashProcessingTimer()
+    {
+        yield return new WaitForSeconds(CurrentDuration);
+        _isAvailable = true;
     }
 }

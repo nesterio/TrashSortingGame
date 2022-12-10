@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine;
 
 public class Grabbable : MonoBehaviour
@@ -23,12 +24,21 @@ public class Grabbable : MonoBehaviour
     
     public virtual void Lift()
     {
+        MainManager.HoldedObject = gameObject;
+        
         _inputManager.MousePosEvent += Move;
         _inputManager.ReleaseEvent += Release;
     }
 
     public virtual void Release()
     {
+        if (MainManager.HoldedObject == gameObject)
+            Utilities.RunAsync(() =>
+            {
+                MainManager.HoldedObject = null;
+            });
+            
+        
         _inputManager.MousePosEvent -= Move;
         _inputManager.ReleaseEvent -= Release;
     }

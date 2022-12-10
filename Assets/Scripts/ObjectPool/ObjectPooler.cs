@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Managers;
+using Types;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -178,6 +180,9 @@ public class ObjectPooler : MonoBehaviour
 
         GameObject objectToSpawn = objectPoolsDict[tag].Dequeue();
         
+        if (objectToSpawn.activeSelf)
+            objectToSpawn = Instantiate(objectToSpawn);
+
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;

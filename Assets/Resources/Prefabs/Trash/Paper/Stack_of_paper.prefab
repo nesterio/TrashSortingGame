@@ -49,7 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 4875631229957771662}
   trashType: 3
-  prefabName: 
   hasVariation: 0
   variationObjects: []
   originalRotation: {x: 0.09229596, y: -0.09229596, z: 0.7010574, w: 0.7010574}
@@ -100,7 +99,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e2bac73541bc1e84cbddb07af61e9f93, type: 2}
+  - {fileID: -6247865024615417176, guid: 0947d2172a0c9b24ab8a7357511cb3cf, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8013ce157b507714aa6419f89f1c84d2, type: 2}
+  - {fileID: 1280280374359279055, guid: 670ef995e6d7d9b4c81de920b1f442e6, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -131,7 +131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 467518573038033682}
   trashType: 1
-  prefabName: 
   hasVariation: 1
   variationObjects:
   - {fileID: 2429775650285486113}
@@ -167,7 +166,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8013ce157b507714aa6419f89f1c84d2, type: 2}
+  - {fileID: 1280280374359279055, guid: 670ef995e6d7d9b4c81de920b1f442e6, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

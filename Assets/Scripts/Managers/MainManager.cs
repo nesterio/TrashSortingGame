@@ -1,49 +1,62 @@
-using System;
 using System.Collections.Generic;
-using Managers;
-using UnityEngine;
 using Scripts.Clicking;
-public class MainManager : MonoBehaviour
+using UnityEngine;
+
+namespace Managers
 {
-    private ClickDetector ClickDetector;
-    private ResolutionManager ResolutionManager;
-
-    public static readonly List<TrashType> AvailableTrashTypes = new List<TrashType>()
+    public class MainManager : MonoBehaviour
     {
-        TrashType.Glass,
-        TrashType.Organic,
-        TrashType.Paper
-    };
-
-    void Start()
-    {
-        ClickDetector = new ClickDetector();
-        ResolutionManager = new ResolutionManager();
-        
-        ResolutionManager.SetCameraPosition(ResolutionManager.CameraPosZ);
-
-        TrashSpawner.InitializeTrashPools(() => 
-            ObjectPooler.Instance.Initialize
-                (StartSpawning));
-    }
+        //private ClickMaterialType _clickMaterialType;
     
+        private ClickDetector _clickDetector;
 
-    public void StartSpawning()
-    {
-        if (TrashSpawner.IsSpawning) 
-            return;
-        
-        TrashSpawner.IsSpawning = true;
-        StartCoroutine(TrashSpawner.Spawner(StartSpawning));
-    }
+        public static GameObject HoldedObject = null;
 
-    public void PauseSpawning()
-    {
-        if (!TrashSpawner.IsSpawning) 
-            return;
+        public static MainManager Instance;
+
+        public static readonly List<TrashType> AvailableTrashTypes = new List<TrashType>()
+        {
+            TrashType.Glass,
+            TrashType.Organic,
+            TrashType.Paper
+        };
+
+        void Awake()
+        {
+            if (Instance != null)
+                Destroy(this);
+            else
+                Instance = this;
+        }
+
+        void Start()
+        {
+            //ClickMaterialType = new ClickMaterialType(); // Зачем это тут?
         
-        TrashSpawner.IsSpawning = false;
-        StopCoroutine(TrashSpawner.Spawner());
-    }
+            _clickDetector = new ClickDetector();
+        
+            TrashSpawner.InitializeTrashPools(() => 
+                ObjectPooler.Instance.Initialize
+                    (StartSpawning));
+        }
+
+        public void StartSpawning()
+        {
+            if (TrashSpawner.IsSpawning) 
+                return;
+        
+            TrashSpawner.IsSpawning = true;
+            StartCoroutine(TrashSpawner.Spawner(StartSpawning));
+        }
+
+        public void PauseSpawning()
+        {
+            if (!TrashSpawner.IsSpawning) 
+                return;
+        
+            TrashSpawner.IsSpawning = false;
+            StopCoroutine(TrashSpawner.Spawner());
+        }
     
+    }
 }
